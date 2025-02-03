@@ -1,0 +1,17 @@
+{
+    "name": "ali/streaming-musical-spotify",
+    "autoload": {
+        "psr-4": {
+            "Ali\\StreamingMusicalSpotify\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Mohammed Ali Boutaine",
+            "email": "111361086+mohammed-ali-boutaine@users.noreply.github.com"
+        }
+    ],
+    "require": {
+        "psr/http-message": "^2.0"
+    }
+}
