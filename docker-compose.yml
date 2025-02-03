@@ -7,11 +7,12 @@ services:
       dockerfile: Dockerfile
     container_name: php_app
     volumes:
-      - ./app:/var/www/html
+      - .:/var/www/html
     ports:
       - "8080:80"
     depends_on:
       - db
+    command: ["/bin/sh", "-c", "composer install && apache2-foreground"]
     networks:
       - app_network
 
