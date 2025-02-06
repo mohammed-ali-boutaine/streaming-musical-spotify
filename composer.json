@@ -2,7 +2,9 @@
     "name": "ali/streaming-musical-spotify",
     "autoload": {
         "psr-4": {
-            "Ali\\StreamingMusicalSpotify\\": "src/"
+            "Ali\\StreamingMusicalSpotify\\": "app/",
+            "App\\": "app/",
+            "Core\\": "core/"
         }
     },
     "authors": [

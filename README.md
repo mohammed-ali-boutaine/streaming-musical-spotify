@@ -21,3 +21,14 @@
 - `docker-compose.yml`: Docker Compose configuration.
 - `Dockerfile`: Dockerfile for building the PHP environment.
 - `README.md`: Project documentation.
+
+## .env example 
+```shell 
+DB_HOST=localhost
+DB_NAME=dbname
+DB_USER=username
+DB_PASSWORD=pass
+DB_DRIVER=pgsql
+APP_ENV=development
+
+```
