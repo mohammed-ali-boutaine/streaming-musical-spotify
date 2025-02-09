@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../bootstrap.php';
 
@@ -23,13 +23,17 @@ Router::get('', 'Home@index');
 Router::get('login', 'Home@login');
 Router::get('register', 'Home@register');
 Router::get('users', 'UserController@index');
-Router::get('test', 'Test@index');
-Router::post('test', 'Test@testForm');
+
+
+Router::get('dashboard', 'home@dashboard');
+
+
+Router::get('not-found', 'Home@notFound');
 
 
 // ----  post
-Router::post('login', 'Home@handleLogin');
-Router::post('register', 'Home@handleRegister');
+Router::post('login', 'AuthController@login');
+Router::post('register', 'AuthController@register');
 
 
 

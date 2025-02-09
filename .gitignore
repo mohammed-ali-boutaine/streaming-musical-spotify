@@ -1,3 +1,5 @@
 /vendor/
 /test/
 .env
+.todo
+info.md

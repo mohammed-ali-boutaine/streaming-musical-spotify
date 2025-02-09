@@ -28,7 +28,7 @@ class Model
         $dbname = $_ENV['DB_NAME'] ;
         $username = $_ENV['DB_USER'];
         $password = $_ENV['DB_PASSWORD'] ;
-        $dsn = "$driver:host=$host;dbname=$dbname;charset=utf8mb4";
+        $dsn = "$driver:host=$host;dbname=$dbname";
 
         try {
             $pdo = new PDO($dsn, $username, $password);

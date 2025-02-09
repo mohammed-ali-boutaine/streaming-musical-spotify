@@ -39,6 +39,18 @@ services:
       - "8081:8080"
     networks:
       - app_network
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin_container
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: aliboutaine897@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: aliali
+    ports:
+      - "8082:80"
+    depends_on:
+      - db
+
 
 networks:
   app_network:

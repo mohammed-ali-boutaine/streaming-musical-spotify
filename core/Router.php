@@ -27,8 +27,8 @@ class Router {
             $controllerInstance = new $class();
             $controllerInstance->$method();
         } else {
-            http_response_code(404);
-            echo "404 Not Found";
+            header('Location: /not-found');
+            exit;
         }
     }
 }

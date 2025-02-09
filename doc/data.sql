@@ -22,7 +22,7 @@ CREATE TABLE users (
     bio TEXT,
     image_path TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
 );
 
 -- Indexes for Users Table
