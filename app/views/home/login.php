@@ -165,13 +165,13 @@
         <!-- Login Form -->
         <form class="form-container" action="/login" method="POST">
             <div class="form-group">
-                <label for="email">Email or username</label>
-                <input type="email" id="email" placeholder="Email or username" >
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Email" name="email">
             </div>
 
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" placeholder="Password" >
+                <input type="password" id="password" placeholder="Password" name="password">
             </div>
 
             <div class="checkbox-group">

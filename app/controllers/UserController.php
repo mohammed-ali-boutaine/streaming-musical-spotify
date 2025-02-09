@@ -11,18 +11,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::getAll();
-        // $users =null;
-        // $users = [
-        //     ["id" => "1",
-        //     "name" => "ali",
-        //     "email" => "ali",
-        //     "created_at" => "2025-02-03"],
-
-        //     ["id" => "2",
-        //     "name" => "ali",
-        //     "email" => "ali",
-        //     "created_at" => "2025-02-03"],
-        // ];
+    
         $this->view('/user/index', ['users' => $users]);
     }
     // create user
@@ -44,6 +33,7 @@ class UserController extends Controller
         // $name = $_POST["name"];
         // $user = new User(null, $email, $name);
         // $user->save();
+
         header('Location: /users');
     }
 

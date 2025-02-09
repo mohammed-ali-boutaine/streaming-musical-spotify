@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use Core\Controller;
 
+use \App\Models\User;
+
 class Home extends Controller
 {
      public function index()
@@ -11,7 +13,16 @@ class Home extends Controller
 
           $this->view('home/index');
      }
+     public function dashboard()
+     {
 
+          $this->view('dashboard/index');
+     }
+     public function notFound()
+     {
+
+          $this->view('home/404');
+     }
      public function login()
      {
           $this->view('home/login');
@@ -19,20 +30,5 @@ class Home extends Controller
      public function register()
      {
           $this->view('home/register');
-     }
-
-     public function handleLogin()
-     {
-          echo "<pre>";
-          echo "login test \n";
-          print_r($_POST);
-          echo "</pre>";
-     }
-
-     public function handleRegister()
-     {
-          echo "<pre>";
-          print_r($_POST);
-          echo "</pre>";
      }
 }

@@ -11,22 +11,27 @@ class User extends Model
     private ?int $id = null;
     private string $email = '';
     private ?string $password = null;
+    private string $username = '';
+    private ?string $role = "user";
     private ?string $profilePic = null;
-    private ?string $role = null;
     private ?string $status = null;
     private ?string $createdAt = null;
     private ?string $updatedAt = null;
-    private string $name = '';
 
     protected static string $table = 'users'; // Define table name
 
-    public function __construct(?int $id = null, string $email = '', string $name = '')
+    public function __construct($id = null, string $email = '', string $username = '',string $password ='',string $role="user",string $profilePic = null)
     {
         if ($id !== null) {
             $this->id = $id;
         }
         $this->email = $email;
-        $this->name = $name;
+        $this->username = $username;
+        $this->password = $password;
+        $this->role = $role;
+        $this->profilePic = $profilePic;
+
+        // $this->password = password_hash($password,PASSWORD_BCRYPT);
     }
 
     // getters
@@ -34,18 +39,29 @@ class User extends Model
     {
         return $this->id;
     }
-    function getName(): string
+    function getPassword()
     {
-        return $this->name;
+        return $this->password;
+    }
+    function getUsername(): string
+    {
+        return $this->username;
     }
     function getEmail(): string
     {
         return $this->email;
     }
-    // setters 
-    function setName(string $name): void
+    function getRole(){
+        return $this->role;
+    }
+    public function getProfilePic(): ?string
     {
-        $this->name = $name;
+        return $this->profilePic;
+    }
+    // setters 
+    function setUsername(string $username): void
+    {
+        $this->username = $username;
     }
     function setEmail(string $email): void
     {
@@ -69,36 +85,28 @@ class User extends Model
         return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
     }
 
-    public static function create(array $data): self
-    {
-        try {
-            $user = new self(null, $data['email'], $data['name']);
-            if ($user->insert()) {
-                return $user;
-            }
-            return null;
-        } catch (\Exception $e) {
-            return null;
-        }
-    }
+
     public function save(): bool
     {
         return $this->id ? $this->update() : $this->insert();
     }
     private function insert(): bool
     {
-        $sql = "INSERT INTO " . self::$table . " (name, email, created_at) VALUES (:name, :email, NOW())";
+        $sql = "INSERT INTO " . self::$table . " (username, email,password, created_at) VALUES (:username, :email,:password, NOW())";
         $stmt = self::db()->prepare($sql);
         $success = $stmt->execute([
-            ':name' => $this->name,
-            ':email' => $this->email
+            ':username' => $this->username,
+            ':email' => $this->email,
+            ':password' => $this->password
+
         ]);
 
         if ($success) {
             $this->id = (int)self::db()->lastInsertId();
+            return true;
         }
 
-        return $success;
+        return false;
     }
 
     private function update(): bool
@@ -107,18 +115,22 @@ class User extends Model
         $stmt = self::db()->prepare($sql);
         return $stmt->execute([
             ':id' => $this->id,
-            ':name' => $this->name,
+            ':name' => $this->username,
             ':email' => $this->email
         ]);
     }
 
-    static public function findByEmail(string $email): ?array
+    static public function findByEmail(string $email)
     {
         $sql = "SELECT * FROM " . self::$table . " WHERE email = :email";
         $stmt = self::db()->prepare($sql);
         $stmt->execute([':email' => $email]);
-        return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
+        $result = $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
+
+        return $result ?: false;
     }
+
+
     static public function deleteUser($id)
     {
         $sql = "DELETE FROM " . self::$table . " WHERE id = :id";
